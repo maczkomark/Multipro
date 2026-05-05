@@ -1,0 +1,25 @@
+{
+  "name": "Multipro Group — Porpáczy Marcell Péter e.v.",
+  "short_name": "Multipro Group",
+  "description": "Villanyszerelés, hangosítás, festés és ezermester munkák Szombathelyen.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0B0B0F",
+  "theme_color": "#0B0B0F",
+  "lang": "hu-HU",
+  "icons": [
+    {
+      "src": "images/brand/logo-dark.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/brand/logo-light.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

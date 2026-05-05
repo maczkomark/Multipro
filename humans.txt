@@ -1,0 +1,12 @@
+/* TEAM */
+  Tulajdonos: Porpáczy Marcell Péter
+  Cég: Multipro Group (egyéni vállalkozó)
+  Hely: Szombathely, Vas megye, Magyarország
+  E-mail: infomultipro01@gmail.com
+  Telefon: +36 70 516 0221
+
+/* SITE */
+  Nyelv: Magyar
+  Doctype: HTML5
+  IDE: VS Code
+  Standards: HTML5, CSS3, ES2020+
