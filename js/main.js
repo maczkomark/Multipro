@@ -207,9 +207,10 @@
       setBusy(true);
 
       try {
+        const body = new URLSearchParams(new FormData(form));
         const response = await fetch(form.action, {
           method: 'POST',
-          body: new FormData(form),
+          body,
           headers: { 'Accept': 'application/json' }
         });
 
