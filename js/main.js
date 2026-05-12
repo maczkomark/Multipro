@@ -178,38 +178,53 @@
     });
   }
 
-  /* ── Contact form ─────────────────────────── */
+  /* ── Contact form (Formspree AJAX) ────────── */
   function initContactForm() {
     const form = $('#contact-form');
     if (!form) return;
     const successBox = $('.form__success', form);
+    const errorBox = $('.form__error', form);
+    const submitBtn = form.querySelector('button[type="submit"]');
 
-    form.addEventListener('submit', (e) => {
+    const setBusy = (busy) => {
+      submitBtn.disabled = busy;
+      submitBtn.dataset.busy = busy ? 'true' : 'false';
+      submitBtn.querySelector('span').textContent = busy ? 'Küldés...' : 'Üzenet küldése';
+    };
+
+    const showOnly = (which) => {
+      $$('.field, .checkbox, .btn--block', form).forEach(el => el.style.display = 'none');
+      if (successBox) successBox.hidden = which !== 'success';
+      if (errorBox) errorBox.hidden = which !== 'error';
+    };
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      // Basic HTML5 validity
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
-      const data = Object.fromEntries(new FormData(form).entries());
+      setBusy(true);
 
-      // Build mailto fallback so the message reaches Marcell even without backend
-      const subject = encodeURIComponent(`Új ajánlatkérés — ${data.service || 'Általános'}`);
-      const body = encodeURIComponent(
-        `Név: ${data.name || ''}\n` +
-        `Telefon: ${data.phone || ''}\n` +
-        `E-mail: ${data.email || ''}\n` +
-        `Szolgáltatás: ${data.service || ''}\n\n` +
-        `Üzenet:\n${data.message || ''}`
-      );
-      const mailto = `mailto:infomultipro01@gmail.com?subject=${subject}&body=${body}`;
-      // Open user's mail client in a new tab
-      window.location.href = mailto;
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
 
-      // Show inline success
-      $$('.field, .checkbox, .btn--block', form).forEach(el => el.style.display = 'none');
-      if (successBox) successBox.hidden = false;
-      form.reset();
+        if (response.ok) {
+          showOnly('success');
+          form.reset();
+        } else {
+          // Form endpoint not configured yet, or Formspree returned an error
+          showOnly('error');
+        }
+      } catch (err) {
+        showOnly('error');
+      } finally {
+        setBusy(false);
+      }
     });
   }
 

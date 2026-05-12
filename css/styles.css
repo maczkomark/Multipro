@@ -1112,16 +1112,31 @@ strong { font-weight: 600; color: var(--paper); }
   margin-top: 2px; flex-shrink: 0;
 }
 
-.form__success {
+.form__success,
+.form__error {
   text-align: center;
   padding: 1rem 0;
 }
-.form__success h3 {
+.form__success h3,
+.form__error h3 {
+  font-family: var(--ff-display);
   font-size: 1.6rem;
-  color: var(--copper);
   margin-bottom: .5rem;
 }
-.form__success p { color: var(--paper-dim); }
+.form__success h3 { color: var(--copper); }
+.form__error h3 { color: var(--crimson); }
+.form__success p,
+.form__error p { color: var(--paper-dim); }
+.form__error a {
+  color: var(--copper);
+  border-bottom: 1px dashed currentColor;
+}
+.form__error a:hover { color: var(--paper); }
+
+button[type="submit"][data-busy="true"] {
+  opacity: .65;
+  cursor: progress;
+}
 
 @media (max-width: 900px) {
   .contact__inner { grid-template-columns: 1fr; }
