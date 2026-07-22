@@ -1,7 +1,7 @@
 {
   "name": "Multipro Group — Porpáczy Marcell Péter e.v.",
   "short_name": "Multipro Group",
-  "description": "Villanyszerelés, hangosítás, festés és ezermester munkák Szombathelyen.",
+  "description": "Villanyszerelés, rendezvényszervezés, karbantartási és ezermesteri munkák Szombathelyen.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
