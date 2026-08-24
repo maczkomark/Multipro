@@ -178,13 +178,17 @@
     });
   }
 
-  /* ── Contact form (Formspree AJAX) ────────── */
+  /* ── Contact form (mmdigital form handler, JSON AJAX) ────── */
   function initContactForm() {
     const form = $('#contact-form');
     if (!form) return;
     const successBox = $('.form__success', form);
     const errorBox = $('.form__error', form);
     const submitBtn = form.querySelector('button[type="submit"]');
+    const tsField = form.querySelector('input[name="_ts"]');
+
+    // Stamp the moment the form became available — the handler uses it against bots
+    if (tsField) tsField.value = String(Date.now());
 
     const setBusy = (busy) => {
       submitBtn.disabled = busy;
@@ -192,10 +196,16 @@
       submitBtn.querySelector('span').textContent = busy ? 'Küldés...' : 'Üzenet küldése';
     };
 
-    const showOnly = (which) => {
+    const showSuccess = () => {
       $$('.field, .checkbox, .btn--block', form).forEach(el => el.style.display = 'none');
-      if (successBox) successBox.hidden = which !== 'success';
-      if (errorBox) errorBox.hidden = which !== 'error';
+      if (errorBox) errorBox.hidden = true;
+      if (successBox) successBox.hidden = false;
+    };
+
+    // On failure the fields stay in place so the visitor can retry
+    const showError = () => {
+      if (successBox) successBox.hidden = true;
+      if (errorBox) errorBox.hidden = false;
     };
 
     form.addEventListener('submit', async (e) => {
@@ -204,25 +214,27 @@
         form.reportValidity();
         return;
       }
+      if (errorBox) errorBox.hidden = true;
       setBusy(true);
 
       try {
-        const body = new URLSearchParams(new FormData(form));
+        const data = Object.fromEntries(new FormData(form).entries());
         const response = await fetch(form.action, {
           method: 'POST',
-          body,
-          headers: { 'Accept': 'application/json' }
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
         });
+        const result = await response.json().catch(() => ({}));
 
-        if (response.ok) {
-          showOnly('success');
+        if (response.ok && result.ok !== false) {
           form.reset();
+          if (tsField) tsField.value = String(Date.now());
+          showSuccess();
         } else {
-          // Form endpoint not configured yet, or Formspree returned an error
-          showOnly('error');
+          showError();
         }
       } catch (err) {
-        showOnly('error');
+        showError();
       } finally {
         setBusy(false);
       }

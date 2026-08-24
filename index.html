@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- Security & Privacy headers (also enforced server-side via .htaccess) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.openstreetmap.org https://*.openstreetmap.org; connect-src 'self' https://api.maczkoweb.hu; form-action 'self' https://api.maczkoweb.hu; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.openstreetmap.org https://*.openstreetmap.org; connect-src 'self' https://form.mmdigital.hu; form-action 'self' https://form.mmdigital.hu; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()">
@@ -797,15 +797,15 @@
         </div>
 
         <form class="form" id="contact-form"
-              action="https://api.maczkoweb.hu/api/contact"
+              action="https://form.mmdigital.hu/api/form/b8kuz8ekRXHS"
               method="POST"
               novalidate>
 
           <!-- Anti-spam honeypot — bots fill this, humans don't see it -->
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
 
-          <!-- Signed token — generated with `npm run token` on the form-handler server -->
-          <input type="hidden" name="_token" value="eyJzaXRlIjoiTXVsdGlwcm8gR3JvdXAiLCJ0byI6ImluZm9tdWx0aXBybzAxQGdtYWlsLmNvbSIsIm9yaWdpbnMiOlsiaHR0cHM6Ly9tdWx0aXByb2dyb3VwLmh1IiwiaHR0cHM6Ly93d3cubXVsdGlwcm9ncm91cC5odSIsImh0dHBzOi8vbWFjemtvbWFyay5naXRodWIuaW8iXSwiZnJvbU5hbWUiOiJNdWx0aXBybyBHcm91cCB3ZWJvbGRhbCIsInN1YmplY3RQcmVmaXgiOiLDmmogYWrDoW5sYXRrw6lyw6lzIOKAlCBNdWx0aXBybyBHcm91cCJ9.x-40aurzLD9iQxfSa0lxn4wBpEf0_c25wTMUBBg_V_A">
+          <!-- Form-open timestamp — lets the handler reject instant, machine-fast submits -->
+          <input type="hidden" name="_ts" value="">
 
           <div class="form__row">
             <label class="field">
