@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- Security & Privacy headers (also enforced server-side via .htaccess) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.openstreetmap.org https://*.openstreetmap.org; connect-src 'self' https://form.mmdigital.hu; form-action 'self' https://form.mmdigital.hu; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://adminsite.mmdigital.hu; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.openstreetmap.org https://*.openstreetmap.org; connect-src 'self' https://form.mmdigital.hu https://adminsite.mmdigital.hu; form-action 'self' https://form.mmdigital.hu; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()">
@@ -910,5 +910,6 @@
   </footer>
 
   <script src="js/main.js" defer></script>
+  <script defer src="https://adminsite.mmdigital.hu/analitika.js" data-kulcs="7-Y9zfeyveOW"></script>
 </body>
 </html>
